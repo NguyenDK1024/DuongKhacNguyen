@@ -200,9 +200,10 @@ namespace DuongKhacNguyen
                 Console.WriteLine();
             }
         }
-
-        public void TimViTriCongViec(List<To_Do> danhSachCongViec, int kieuTimKiem)
+        public List<int> TimViTriCongViec(List<To_Do> danhSachCongViec, int kieuTimKiem)
         {
+            List<int> viTriCongViec = new List<int>();
+
             Console.WriteLine("Nhập thông tin cần tìm:");
 
             if (kieuTimKiem == 1)
@@ -214,12 +215,22 @@ namespace DuongKhacNguyen
                 {
                     if (danhSachCongViec[i].TenCongViec.Equals(tenCongViec))
                     {
-                        Console.WriteLine("Vị trí công việc theo tên: {0}", i);
-                        return; // Thoát khỏi phương thức sau khi in kết quả
+                        viTriCongViec.Add(i+1);
                     }
                 }
 
-                Console.WriteLine("Không tìm thấy công việc theo tên.");
+                if (viTriCongViec.Count > 0)
+                {
+                    Console.WriteLine("Vị trí công việc theo tên:");
+                    foreach (int viTri in viTriCongViec)
+                    {
+                        Console.WriteLine(viTri);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Không tìm thấy công việc theo tên.");
+                }
             }
             else if (kieuTimKiem == 2)
             {
@@ -230,13 +241,25 @@ namespace DuongKhacNguyen
                 {
                     if (danhSachCongViec[i].DoUuTien == doUuTien)
                     {
-                        Console.WriteLine("Vị trí công việc theo độ ưu tiên: {0}", i);
-                        return; // Thoát khỏi phương thức sau khi in kết quả
+                        viTriCongViec.Add(i+1);
                     }
                 }
 
-                Console.WriteLine("Không tìm thấy công việc theo độ ưu tiên.");
+                if (viTriCongViec.Count > 0)
+                {
+                    Console.WriteLine("Vị trí công việc theo độ ưu tiên:");
+                    foreach (int viTri in viTriCongViec)
+                    {
+                        Console.WriteLine(viTri);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Không tìm thấy công việc theo độ ưu tiên.");
+                }
             }
+
+            return viTriCongViec;
         }
     }
 
