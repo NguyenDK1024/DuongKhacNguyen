@@ -371,8 +371,6 @@ namespace DuongKhacNguyen
                 if (y == "y"||y=="Y") break;
                 Console.Clear();
             }
-
-
         Console.ReadKey();
         }
     }
