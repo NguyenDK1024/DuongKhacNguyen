@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DuongKhacNguyen
 {
-    //Class check ky tu nhap vao de chon chuc nang co dung khong
+    //Class check ky tu nhap vao de chon chuc nang co dung khong?
     public class check_chuc_nang
     {
         public int Get_valid(int maxValue)
@@ -28,7 +28,7 @@ namespace DuongKhacNguyen
                     }
                     else
                     {
-                        break; // Ký tự hợp lệ, thoát khỏi vòng lặp
+                        break;
                     }
                 }
                 else
@@ -40,7 +40,7 @@ namespace DuongKhacNguyen
             return validCharacter;
         }
     }
-    //Class cong viec can lam
+    //Class Công việc cần làm
     public class To_Do
     {
         public string TenCongViec { get; set; }
@@ -48,7 +48,7 @@ namespace DuongKhacNguyen
         public string NoiDungMoTa { get; set; }
         public string TrangThai { get; set; }
 
-        public void NhapThongTin()
+        public void NhapThongTin()//Chức năng 1
         {
             Console.WriteLine("Nhập thông tin công việc:");
 
@@ -111,23 +111,16 @@ namespace DuongKhacNguyen
         }
     }
 
-    // class chuc nang
+    // class Chức năng
     public class Chuc_nang
     {
-        public void XuatDanhSachCongViec(List<To_Do> danhSachCongViec)//Chuc nang 6
-        {
-            Console.WriteLine("Danh sách công việc:");
 
-            foreach (var item in danhSachCongViec)
-            {
-                Console.WriteLine("Tên công việc: " + item.TenCongViec);
-                Console.WriteLine("Độ ưu tiên: " + item.DoUuTien);
-                Console.WriteLine("Nội dung mô tả: " + item.NoiDungMoTa);
-                Console.WriteLine("Trạng thái: " + item.TrangThai);
-                Console.WriteLine();
-            }
+        public void XoaCongViec(List<To_Do> danhSachCongViec, int index)//Chức năng 2
+        {
+                danhSachCongViec.RemoveAt(index);
+                Console.WriteLine("Xóa công việc thành công.");
         }
-        public void XuatDanhSachCongViec_trangthai(List<To_Do> danhSachCongViec)//Chuc nang 3.1
+        public void XuatDanhSachCongViec_trangthai(List<To_Do> danhSachCongViec)//Xuất danh sách công việc hiện có chỉ bao gồm tên và trạng thái
         {
             Console.WriteLine("Danh sách công việc:");
 
@@ -137,13 +130,8 @@ namespace DuongKhacNguyen
                 Console.WriteLine();
             }
         }
-        public void XoaCongViec(List<To_Do> danhSachCongViec, int index)//chuc nang 2
-        {
-                danhSachCongViec.RemoveAt(index);
-                Console.WriteLine("Xóa công việc thành công.");
-        }
 
-        public void CapNhatTrangThaiCongViec(List<To_Do> danhSachCongViec)//chuc nang 3
+        public void CapNhatTrangThaiCongViec(List<To_Do> danhSachCongViec)//Chức năng 3
         {
             Console.WriteLine("Nhập tên công việc cần cập nhật trạng thái:");
             string tenCongViec = Console.ReadLine();
@@ -162,12 +150,12 @@ namespace DuongKhacNguyen
                     Console.WriteLine("2. In Progress");
                     Console.WriteLine("3. In Review");
                     Console.WriteLine("4. Completed");
-                    Console.Write("Chọn trạng thái mới (1-4): ");
+                    Console.Write("Chọn trạng thái mới từ 1 đến 4 ứng với trạng thái tương ứng phía trên: ");
                     string trangThaiInput = Console.ReadLine();
                     while (!To_Do.IsValidTrangThai(trangThaiInput))
                     {
                         Console.WriteLine("Trạng thái không hợp lệ. Vui lòng nhập lại.");
-                        Console.Write("Chọn trạng thái mới (1-4): ");
+                        Console.Write("Chọn trạng thái mới từ 1 đến 4 ứng với trạng thái tương ứng phía trên: ");
                         trangThaiInput = Console.ReadLine();
                     }
 
@@ -184,23 +172,7 @@ namespace DuongKhacNguyen
             }
         }
 
-
-        public void InDanhSachCongViecGiamDanUuTien(List<To_Do> danhSachCongViec)//Chuc nang 5
-        {
-            Console.WriteLine("Danh sách công việc theo thứ tự giảm dần của độ ưu tiên:");
-
-            var danhSachSapXep = danhSachCongViec.OrderByDescending(congViec => congViec.DoUuTien);
-
-            foreach (var congViec in danhSachSapXep)
-            {
-                Console.WriteLine("Tên công việc: {0}", congViec.TenCongViec);
-                Console.WriteLine("Độ ưu tiên: {0}", congViec.DoUuTien);
-                Console.WriteLine("Nội dung mô tả: {0}", congViec.NoiDungMoTa);
-                Console.WriteLine("Trạng thái: {0}", congViec.TrangThai);
-                Console.WriteLine();
-            }
-        }
-        public List<int> TimViTriCongViec(List<To_Do> danhSachCongViec, int kieuTimKiem)
+        public List<int> TimViTriCongViec(List<To_Do> danhSachCongViec, int kieuTimKiem)// Chức năng 4 tìm vị trí công việc theo tên hoặc độ ưu tiên
         {
             List<int> viTriCongViec = new List<int>();
 
@@ -215,13 +187,13 @@ namespace DuongKhacNguyen
                 {
                     if (danhSachCongViec[i].TenCongViec.Equals(tenCongViec))
                     {
-                        viTriCongViec.Add(i+1);
+                        viTriCongViec.Add(i + 1);
                     }
                 }
 
                 if (viTriCongViec.Count > 0)
                 {
-                    Console.WriteLine("Vị trí công việc theo tên:");
+                    Console.WriteLine("Vị trí công việc theo tên hiện đang đứng ở vị trí");
                     foreach (int viTri in viTriCongViec)
                     {
                         Console.WriteLine(viTri);
@@ -229,7 +201,7 @@ namespace DuongKhacNguyen
                 }
                 else
                 {
-                    Console.WriteLine("Không tìm thấy công việc theo tên.");
+                    Console.WriteLine("Không tìm thấy công việc ứng với tên này.");
                 }
             }
             else if (kieuTimKiem == 2)
@@ -241,13 +213,13 @@ namespace DuongKhacNguyen
                 {
                     if (danhSachCongViec[i].DoUuTien == doUuTien)
                     {
-                        viTriCongViec.Add(i+1);
+                        viTriCongViec.Add(i + 1);
                     }
                 }
 
                 if (viTriCongViec.Count > 0)
                 {
-                    Console.WriteLine("Vị trí công việc theo độ ưu tiên:");
+                    Console.WriteLine("Vị trí công việc theo độ ưu tiên đang đứng ở vị trí thứ:");
                     foreach (int viTri in viTriCongViec)
                     {
                         Console.WriteLine(viTri);
@@ -255,11 +227,42 @@ namespace DuongKhacNguyen
                 }
                 else
                 {
-                    Console.WriteLine("Không tìm thấy công việc theo độ ưu tiên.");
+                    Console.WriteLine("Không tìm thấy công việc ứng với độ ưu tiên này.");
                 }
             }
 
             return viTriCongViec;
+        }
+
+        public void InDanhSachCongViecGiamDanUuTien(List<To_Do> danhSachCongViec)//Chức năng 5
+        {
+            Console.WriteLine("Danh sách công việc cần làm theo thứ tự giảm dần của độ ưu tiên:");
+
+            var danhSachSapXep = danhSachCongViec.OrderByDescending(congViec => congViec.DoUuTien);
+
+            foreach (var congViec in danhSachSapXep)
+            {
+                Console.WriteLine("Tên công việc: {0}", congViec.TenCongViec);
+                Console.WriteLine("Độ ưu tiên: {0}", congViec.DoUuTien);
+                Console.WriteLine("Nội dung mô tả: {0}", congViec.NoiDungMoTa);
+                Console.WriteLine("Trạng thái: {0}", congViec.TrangThai);
+                Console.WriteLine();
+            }
+        }
+       
+
+        public void XuatDanhSachCongViec(List<To_Do> danhSachCongViec)//chức năng 6
+        {
+            Console.WriteLine("Danh sách công việc cần làm:");
+
+            foreach (var item in danhSachCongViec)
+            {
+                Console.WriteLine("Tên công việc: " + item.TenCongViec);
+                Console.WriteLine("Độ ưu tiên: " + item.DoUuTien);
+                Console.WriteLine("Nội dung mô tả: " + item.NoiDungMoTa);
+                Console.WriteLine("Trạng thái: " + item.TrangThai);
+                Console.WriteLine();
+            }
         }
     }
 
@@ -275,14 +278,13 @@ namespace DuongKhacNguyen
 
             while (true)
             {
-                Console.WriteLine("1. Chuc nang nhap lieu");
-                Console.WriteLine("2. Chung nang xoa cong viec ");
-                Console.WriteLine("3. Chuc nang cap nhat");
-                Console.WriteLine("4. Chuc nang tim kiem");
-                Console.WriteLine("5. Chuc nang hien thi theo do uu tien giam dan");
-                Console.WriteLine("6. Chuc nang hien thi toan bo cac cong viec dang ton tai");
-
-                Console.WriteLine("Vui long chon chuc nang");
+                Console.WriteLine("1. Chức năng nhập thông cho công việc cần làm");
+                Console.WriteLine("2. Chức năng xóa công việc theo vị trí bạn mong muốn ");
+                Console.WriteLine("3. Chức năng cập nhật trạng thái");
+                Console.WriteLine("4. Chức năng tìm kiếm công việc theo tên hoặc độ ưu tiên");
+                Console.WriteLine("5. Chức năng hiển thị danh sách công việc theo độ ưu tiên giảm dần");
+                Console.WriteLine("6. Chức năng hiển thị danh sách công việc cần làm đang tồn tại");
+                Console.WriteLine("Vui lòng chọn chức năng");
 
                 check_chuc_nang validator = new check_chuc_nang();
                 int chuc_nang = validator.Get_valid(6);
@@ -291,7 +293,7 @@ namespace DuongKhacNguyen
                 {
                     case 1:
                         {
-                            Console.WriteLine("Nhap lieu thong tin");
+                            Console.WriteLine("Chức năng nhập thông cho công việc cần làm");
                             To_Do item = new To_Do();
                             item.NhapThongTin();
                             danhSachCongViec.Add(item);
@@ -301,13 +303,13 @@ namespace DuongKhacNguyen
                         {
                             if (danhSachCongViec.Count > 0)
                             {
-                            Console.WriteLine("Chuc Nang 2 xoa phan tu");
-                            Console.WriteLine("nhap vi tri cong viec ma ban muon xoa");
+                            Console.WriteLine("Chức năng xóa công việc theo vị trí bạn mong muốn");
+                            Console.WriteLine("Công việc bạn muốn xóa đang ở vị trí? Vui lòng nhập vào giá trị hợp lệ hiển thị bên dưới:");
                             int  index = validator.Get_valid(danhSachCongViec.Count);
-                                Chuc_nang xoacongviec = new Chuc_nang();
-                                xoacongviec.XoaCongViec(danhSachCongViec, index-1);  
+                                Chuc_nang chucNang2 = new Chuc_nang();
+                                chucNang2.XoaCongViec(danhSachCongViec, index-1);  
                             }    
-                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập liệu"); }
+                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập thông tin"); }
                             break;
                         }
                     case 3:
@@ -320,7 +322,7 @@ namespace DuongKhacNguyen
                                 Chuc_nang ChucNang3 = new Chuc_nang();
                                 ChucNang3.CapNhatTrangThaiCongViec(danhSachCongViec);
                             }
-                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập liệu"); }
+                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập thông tin"); }
                             break;
                         }
                     case 4:
@@ -328,15 +330,15 @@ namespace DuongKhacNguyen
                             if (danhSachCongViec.Count > 0)
                             {
                                 
-                                Console.WriteLine("Chuc Nang 4, chuc nang tim kiem");
-                                Console.WriteLine("Chuc Nang 4, chuc nang tim kiem theo tên vui lòng nhập số 1");
-                                Console.WriteLine("Chuc Nang 4, chuc nang tim kiem theo độ ưu tiên vui lòng nhập 2");
+                                Console.WriteLine("Chức năng tìm kiếm công việc theo tên hoặc độ ưu tiên");
+                                Console.WriteLine("Tìm kiếm công việc theo tên vui lòng nhập số 1");
+                                Console.WriteLine("Tìm kiếm công việc độ ưu tiên vui lòng nhập 2");
                                 int type = validator.Get_valid(2);
                                 Chuc_nang chucNang_4 = new Chuc_nang();
                                 chucNang_4.TimViTriCongViec(danhSachCongViec, type);
 
                             }
-                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập liệu"); }
+                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập thông tin"); }
                             break;
                         }
                     case 5:
@@ -344,24 +346,29 @@ namespace DuongKhacNguyen
                             if (danhSachCongViec.Count > 0)
                             {
 
-                                Console.WriteLine("Chuc Nang 5, in ra màn hình theo độ ưu tiên giảm dần");
+                                Console.WriteLine("Chức năng hiển thị danh sách công việc theo độ ưu tiên giảm dần");
                                 Chuc_nang chucNang_5 = new Chuc_nang();
                                 chucNang_5.InDanhSachCongViecGiamDanUuTien(danhSachCongViec);
                                                             }
-                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập liệu"); }
+                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập thông tin"); }
                             break;
                         }
                     case 6:
                         {
-                            Console.WriteLine("Chuc Nang 6");
-                            Chuc_nang chucNang = new Chuc_nang();
-                            chucNang.XuatDanhSachCongViec(danhSachCongViec);
+                            if (danhSachCongViec.Count > 0)
+                            {
+                                Console.WriteLine("Chức năng hiển thị danh sách công việc cần làm đang tồn tại");
+                                Chuc_nang chucNang_6 = new Chuc_nang();
+                                chucNang_6.XuatDanhSachCongViec(danhSachCongViec);
+                            }
+                            else { Console.WriteLine("Hiện tại không thể dùng chức năng này vì chưa có công việc cần làm: vui lòng nhập thông tin"); }
                             break;
+
                         }
                 }
-                Console.WriteLine("Nhap ky tu Y de thoat chuong trinh");
+                Console.WriteLine("Nhập ký tự Y để thoát khỏi chương trình");
                 string y = Console.ReadLine();
-                if (y == "y") break;
+                if (y == "y"||y=="Y") break;
                 Console.Clear();
             }
 
